@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chatodroid - IA da Zueira</title>
+<style>
+body {background:#111;color:#0f0;font-family:Arial;text-align:center;margin:0;padding:0;}
+.chat {width:90%;max-width:600px;margin:20px auto;background:#222;padding:15px;border-radius:10px;}
+input {width:70%;padding:10px;margin-top:10px;}
+button {padding:10px;margin-left:5px;}
+#respostas {text-align:left;margin-top:20px;color:#0f0;}
+img,gif,video {max-width:100%;border-radius:5px;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<h1>🤖 Chatodroid - Respostas Infinitas da Zueira</h1>
+
+<div class="chat">
+<input id="pergunta" placeholder="Escreve tua pergunta zoeira aqui">
+<button onclick="responder()">Perguntar</button>
+<button onclick="gerarImagem()">Gerar Imagem</button>
+<button onclick="gerarVideo()">Gerar Vídeo</button>
+<div id="respostas"></div>
+</div>
+
+<script>
+// Função pra responder perguntas de zoeira
+function responder(){
+    let p = document.getElementById("pergunta").value.toLowerCase();
+    let r = "";
+
+    // Zoando erros de digitação
+    p = p.replace(/[^\w\s]/g,''); // remove caracteres estranhos
+
+    // Respostas de exemplo
+    if(p.includes("oi")) r="Eae irmão 😎 suave?";
+    else if(p.includes("quanto é") || p.includes("calculo") || p.includes("soma") || p.includes("multiplica")){
+        r = calcular(p);
+    }
+    else if(p.includes("imagem")) r="Clique no botão 'Gerar Imagem' 🎨";
+    else if(p.includes("video")) r="Clique no botão 'Gerar Vídeo' 🎬";
+    else r="Não entendi, mas vou responder mesmo assim 😂: " + p;
+
+    document.getElementById("respostas").innerHTML += "<p>"+r+"</p>";
+}
+
+// Função de cálculo passo a passo simples
+function calcular(texto){
+    try{
+        // extrai números e operadores simples
+        let numeros = texto.match(/\d+/g);
+        if(!numeros) return "Não achei números para calcular 😅";
+        let soma = 0;
+        for(let i=0;i<numeros.length;i++){soma += parseInt(numeros[i]);}
+        return "Soma dos números: " + numeros.join(" + ") + " = " + soma;
+    }catch(e){return "Erro no cálculo 😵";}
+}
+
+// Função gerar imagem (exemplo)
+function gerarImagem(){
+    let url = "https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif"; // gif exemplo
+    document.getElementById("respostas").innerHTML += `<p>Imagem zoeira:</p><img src="${url}">`;
+}
+
+// Função gerar vídeo (exemplo)
+function gerarVideo(){
+    let url = "https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_1mb.mp4";
+    document.getElementById("respostas").innerHTML += `<p>Vídeo zoeira:</p><video controls src="${url}"></video>`;
+}
+</script>
+
+</body>
+</html>
 
